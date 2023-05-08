@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Action\Film;
+namespace App\Action\Pokemon;
 
-use App\Domain\Film\Service\FilmView;
+use App\Domain\Pokemon\Service\PokemonView;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class FilmViewAction
+final class PokemonViewAction
 {
-    private $movieView;
+    private $PokemonView;
 
-    public function __construct(FilmView $movieView)
+    public function __construct(PokemonView $PokemonView)
     {
-        $this->movieView = $movieView;
+        $this->PokemonView = $PokemonView;
     }
 
     public function __invoke(
@@ -23,7 +23,7 @@ final class FilmViewAction
         // Récupération des parametres
         $userId = $request->getAttribute('id');
 
-        $resultat = $this->movieView->viewAllMovies();
+        $resultat = $this->PokemonView->viewAllPokemon();
 
         // Construit la réponse HTTP
         $response->getBody()->write((string)json_encode($resultat));

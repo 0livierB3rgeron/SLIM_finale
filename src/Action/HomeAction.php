@@ -20,7 +20,7 @@ final class HomeAction
     ): ResponseInterface {
         
         $result = json_encode([
-            'message' => 'Services Web H2023 - Exercice 04'
+            'message' => 'API - Projet Finale - POKEMON - fait par : Olivier Bergeron'
         ]);
         
         $response->getBody()->write($result);
