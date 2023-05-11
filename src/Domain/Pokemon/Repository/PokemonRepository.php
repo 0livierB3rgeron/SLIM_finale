@@ -25,7 +25,7 @@ class PokemonRepository
     }
 
     /**
-     * Sélectionne la liste de tous les films
+     * Sélectionne la liste de tous les pokemon
      * 
      * @return DataResponse
      */
@@ -42,11 +42,11 @@ class PokemonRepository
     }
 
     /**
-     * Sélectionne les informations d'un film
+     * Sélectionne les informations d'un pokemon
      * 
-     * @param int $movieId Le id du film à afficher
+     * @param int $pokeId Le id du pokemon à afficher
      * 
-     * @return array Les informations du films
+     * @return array Les informations du pokemon
      */
     public function selectPokemonById(int $pokeId): array
     {
@@ -67,11 +67,11 @@ class PokemonRepository
 
 
     /**
-     * Ajoute un film
+     * Ajoute un pokemon
      * 
-     * @param array $data Les données du film
+     * @param array $data Les données du pokemon
      * 
-     * @return array Les informations du film ajouté avec son id
+     * @return array Les informations du pokemon ajouté avec son id
      */
     public function createPokemon(array $data): array
     {
@@ -91,9 +91,7 @@ class PokemonRepository
         $query->execute($params);
         // Je récupère le id qui vient d'être créé
         $pokeId = $this->connection->lastInsertId();
-        // Je veux retourner à l'usager le film créé avec le nouveau id, je me sers de la fonction que j'ai 
-        // déjà pour sélectionner un film par son id. En même temps ça me prouve qu'il est bien créé.
-        // C'est pas à toute épreuve comme gestion d'erreur mais pour l'instant on ne s'en occupe pas.
+
         $result = $this->selectPokemonById($pokeId);
 
         return $result;
@@ -102,9 +100,9 @@ class PokemonRepository
 
 
     /**
-     * Supprime un film selon son id
+     * Supprime un pokemon selon son id
      *
-     * @param int $movieId Le id du film à supprimer
+     * @param int $pokemonId Le id du pokemon à supprimer
      *
      * @return bool La suppression à réussi
      */
@@ -116,17 +114,6 @@ class PokemonRepository
         $query = $this->connection->prepare($sql);
         $result = $query->execute($params);
 
-        /*
-        J'ai laissé ce bout de code en commentaire. C'est une façon de récupérer les erreurs sql s'il y en a.
-        plus de détail ici : https://www.php.net/manual/fr/pdo.errorinfo.php
-        La ligne avec le "logger" sert à écrire dans un fichier de log l'erreur. Si on veut s'en servir il y a une déclaration a
-        faire dans le constructeur de la classe. Voir les notes de cours sur les fichiers de logs.
-        */
-        // $errorInfo = $query->errorInfo();
-        // if($errorInfo[0] != 0) {
-        //     $this->logger->error($errorInfo[2]);
-        // }
-
         return $result;
     }
 
@@ -134,12 +121,12 @@ class PokemonRepository
 
 
     /**
-     * Modifie un film
+     * Modifie un pokeon
      * 
-     * @param int $id Le id du film à modifier
-     * @param array $data Les données du film à modifier
+     * @param int $id Le id du pokemon à modifier
+     * @param array $data Les données du pokemon à modifier
      * 
-     * @return array Le film modifié
+     * @return array Le pokemon modifié
      */
     public function updatePokemon(int $id, array $data): array
     {

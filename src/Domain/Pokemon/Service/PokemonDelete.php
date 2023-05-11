@@ -31,22 +31,21 @@ final class PokemonDelete
     }
 
     /**
-     * Supprime un film dans la base de données.
+     * Supprime un pokemon dans la base de données.
      * 
-     * @param int $idMovie Le id du film à supprimer
+     * @param int $idPokemon Le id du pokemon à supprimer
      *
-     * @return array Le film supprimé
+     * @return array Le pokemon supprimé
      */
     public function removePokemon(int $idPokemon): array
     {
 
-        // Je vais chercher les informations du film à supprimer
-        // Pour valider qu'il existe bien et aussi pour les retourner à l'usager après la suppression
+      
         $pokemonToDelete = $this->repository->selectPokemonById($idPokemon);
         // Par défaut le code de statut sera 200 - Succès
         $codeStatus = 200;
 
-        // Si le film n'existe pas on change pour le code 404, sinon on supprime le film
+        // Si le pokemon n'existe pas on change pour le code 404, sinon on supprime le pokemon
         if(empty($pokemonToDelete)) {
             $codeStatus = 404;
         } else {
@@ -55,8 +54,7 @@ final class PokemonDelete
             };
         }
         
-        // Si le film n'existe pas, on retourne un objet vide
-        // J'ai créer un tableau avec le film et le code de statut pour pouvoir les retourner tous les deux avec ma fonction
+        
         $resultat = [
             "pokemon" => empty($pokemonToDelete) ? new stdClass : $pokemonToDelete,
             "codeStatus" => $codeStatus

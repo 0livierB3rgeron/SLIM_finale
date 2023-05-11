@@ -29,8 +29,7 @@ final class PokemonViewByIdAction
 
         if (empty($resultat)) {
             $resultat = new stdClass; 
-            // new stdClass est une astuce pour créer un objet vide, c'est plus consistent comme ça de retourner un objet avec le film
-            // quand on le trouve et un objet vide quand il n'y a rien. Par défaut c'est un tableau vide qui serait retourné.
+           
             $codeStatus = 404;
         }
         

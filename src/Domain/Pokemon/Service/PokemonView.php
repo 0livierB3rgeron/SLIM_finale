@@ -25,9 +25,9 @@ final class PokemonView
     }
 
     /**
-     * Sélectionne tous les films.
+     * Sélectionne tous les pokemons
      *
-     * @return array La liste des films
+     * @return array La liste des pokemons
      */
     public function viewAllPokemon(): array
     {
@@ -43,9 +43,9 @@ final class PokemonView
     }
 
     /**
-     * Sélectionne un film selon son id.
+     * Sélectionne un pokemon selon son id.
      *
-     * @return array Les informations d'un film
+     * @return array Les informations d'un pokemon
      */
     public function viewPokemonById(int $pokemonId): array
     {

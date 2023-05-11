@@ -20,11 +20,11 @@ final class PokemonCreate
     }
 
     /**
-     * Ajout d'un film dans la base de données.
+     * Ajout d'un pokemon dans la base de données.
      * 
      * @param array $data Les informations à ajouter
      *
-     * @return array Le film ajouté
+     * @return array Le pokemon ajouté
      */
     public function addPokemon(array $data): array
     {

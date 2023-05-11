@@ -23,5 +23,7 @@ return function (App $app) {
     // Modifie un pokemon grâce à son ID
     $app->put('/pokemon/{id}', \App\Action\Pokemon\PokemonUpdateAction::class);
 
+    //Creer un ussager
+    $app->post('/user', \App\Action\User\UserCreateAction::class);
 };
 
