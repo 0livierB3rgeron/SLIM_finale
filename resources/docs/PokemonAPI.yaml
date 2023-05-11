@@ -1,0 +1,180 @@
+---
+openapi: 3.0.0
+info:
+  title: PokemonAPI
+  description: C'est mon API
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1/EpreuveFinale/SLIM_finale/pokemon/
+paths:
+  /pokemon:
+    get:
+      tags:
+      - Pokemon
+      summary: Affiche la liste de tous les pokemons.
+      parameters:
+      - name: id
+        in: query
+        description: Une valeur pour filter par le id
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Un tableau de pokemon
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+    post:
+      tags:
+      - Pokemon
+      summary: Crée un livre.
+      requestBody:
+        description: Les informations du pokemon à créer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pokemon_body'
+        required: true
+      responses:
+        "201":
+          description: Le id du pokemon créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+  /pokemon/{id}:
+    get:
+      tags:
+      - Pokemon
+      summary: Affiche un pokemon selon son id.
+      parameters:
+      - name: id
+        in: path
+        description: Le id du pokemon à afficher
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1074
+      responses:
+        "200":
+          description: Le pokemon à afficher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+    put:
+      tags:
+      - Pokemon
+      summary: Modifier un Pokemon.
+      parameters:
+      - name: id
+        in: path
+        description: Le id du pokemon à modifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        description: Les informations du pokemon à modifier.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pokemon_id_body'
+        required: true
+      responses:
+        "200":
+          description: Le pokemon modifié
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+    delete:
+      tags:
+      - Pokemon
+      summary: Supprime un pokemon selon son id.
+      parameters:
+      - name: id
+        in: path
+        description: Le id du pokemon à supprimer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Le pokemon supprimé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+components:
+  schemas:
+    Pokemon:
+      required:
+      - abilite
+      - nom
+      - stats_total
+      - type
+      type: object
+      properties:
+        nom:
+          type: string
+        type:
+          type: string
+        abilite:
+          type: string
+        stats_total:
+          type: integer
+          format: int64
+      example:
+        nom: Bulbasaur
+        type: Grass/Poison
+        abilite: Chlorophyll
+        stats_total: "318"
+    pokemon_body:
+      type: object
+      properties:
+        nom:
+          type: string
+        type:
+          type: string
+        abilite:
+          type: string
+        stats_total:
+          type: integer
+      example:
+        nom: Bulbasaur
+        type: Grass/Poison
+        abilite: Chlorophyll
+        stats_total: "318"
+    inline_response_201:
+      type: object
+      properties:
+        pokemon_id:
+          type: integer
+      example:
+        id: 1
+    pokemon_id_body:
+      type: object
+      properties:
+        nom:
+          type: string
+        type:
+          type: string
+        abilite:
+          type: string
+        stats_total:
+          type: integer
+      example:
+        nom: Bulbasaur
+        type: Grass/Poison
+        abilite: Chlorophyll
+        stats_total: "318"
